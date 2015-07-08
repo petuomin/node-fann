@@ -12,6 +12,9 @@ void NNet::PrototypeInit(Local<FunctionTemplate> t)
   NODE_SET_PROTOTYPE_METHOD(t, "train", Train);
   NODE_SET_PROTOTYPE_METHOD(t, "cascadetrain", CascadeTrain);
   NODE_SET_PROTOTYPE_METHOD(t, "train_once", TrainOnce);
+  NODE_SET_PROTOTYPE_METHOD(t, "train_epoch", TrainEpoch);
+  NODE_SET_PROTOTYPE_METHOD(t, "test_data", TestData);
+
   NODE_SET_PROTOTYPE_METHOD(t, "run", Run);
   NODE_SET_PROTOTYPE_METHOD(t, "save", SaveToFile);
 
@@ -27,6 +30,7 @@ void NNet::PrototypeInit(Local<FunctionTemplate> t)
   NODE_SET_PROTOTYPE_METHOD(t, "activation_function_output", ActivationFunctionOutput);
   NODE_SET_PROTOTYPE_METHOD(t, "get_num_input", GetNumInput);
   NODE_SET_PROTOTYPE_METHOD(t, "get_MSE", GetMse);
+  NODE_SET_PROTOTYPE_METHOD(t, "reset_MSE", ResetMse);
   NODE_SET_PROTOTYPE_METHOD(t, "get_num_output", GetNumOutput);
   NODE_SET_PROTOTYPE_METHOD(t, "get_total_neurons", GetTotalNeurons);
   NODE_SET_PROTOTYPE_METHOD(t, "get_total_connections", GetTotalConnections);

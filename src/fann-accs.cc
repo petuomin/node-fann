@@ -187,6 +187,15 @@ NAN_METHOD(NNet::GetMse)
   NanReturnValue(NanNew<Number>(ret));
 }
 
+NAN_METHOD(NNet::ResetMse)
+{
+  NanScope();
+  NNet *net = ObjectWrap::Unwrap<NNet>(args.This());
+
+  fann_reset_MSE(net->FANN);
+  NanReturnUndefined();
+}
+
 NAN_METHOD(NNet::GetNumInput)
 {
   NanScope();

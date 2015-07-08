@@ -33,6 +33,7 @@ class NNet : public ObjectWrap
     static NAN_METHOD(GetNumInput);
     static NAN_METHOD(GetNumOutput);
     static NAN_METHOD(GetMse);
+    static NAN_METHOD(ResetMse);
     static NAN_METHOD(GetTotalNeurons);
     static NAN_METHOD(GetTotalConnections);
     static NAN_METHOD(GetNetworkType);
@@ -46,10 +47,12 @@ class NNet : public ObjectWrap
     static NAN_METHOD(GetBiasArray);
     static NAN_METHOD(Train);
     static NAN_METHOD(TrainOnce);
+    static NAN_METHOD(TrainEpoch);
+    static NAN_METHOD(TestData);
     static NAN_METHOD(Run);
     static NAN_METHOD(CascadeTrain);
     static NAN_METHOD(SaveToFile);
-
+ 
   private:
     struct fann *FANN;
     bool scale_present;

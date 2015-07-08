@@ -145,3 +145,56 @@ NAN_METHOD(NNet::TrainOnce)
   NanReturnUndefined();
 }
 
+NAN_METHOD(NNet::TrainEpoch)
+{
+  NanScope();
+  NNet *net = ObjectWrap::Unwrap<NNet>(args.This());
+  struct fann_train_data *traindata = NULL;
+
+  if (args.Length() < 1)
+    return NanThrowError("No arguments supplied");
+
+  if (!args[0]->IsArray())
+    return NanThrowError("First argument should be 2d-array (training data set)");
+
+  Local<Array> dataset = args[0].As<Array>();
+
+  const char* error = net->MakeTrainData(dataset, &traindata);
+  if (error != NULL)
+    return NanThrowError(error);
+
+  if (traindata == NULL)
+    return NanThrowError("Internal error");
+
+  float mse = fann_train_epoch(net->FANN, traindata);
+
+  NanReturnValue(NanNew<Number>(mse));
+}
+
+NAN_METHOD(NNet::TestData)
+{
+  NanScope();
+  NNet *net = ObjectWrap::Unwrap<NNet>(args.This());
+  struct fann_train_data *traindata = NULL;
+
+  if (args.Length() < 1)
+    return NanThrowError("No arguments supplied");
+
+  if (!args[0]->IsArray())
+    return NanThrowError("First argument should be 2d-array (training data set)");
+
+  Local<Array> dataset = args[0].As<Array>();
+
+  const char* error = net->MakeTrainData(dataset, &traindata);
+  if (error != NULL)
+    return NanThrowError(error);
+
+  if (traindata == NULL)
+    return NanThrowError("Internal error");
+
+  float mse = fann_test_data(net->FANN, traindata);
+
+  NanReturnValue(NanNew<Number>(mse));
+}
+
+
